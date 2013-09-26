@@ -1,0 +1,18 @@
+{
+    "authors": [
+        {
+            "name": "Gonzalo Ayuso",
+            "email": "gonzalo123@gmail.com"
+        }
+    ],
+    "require": {
+        "silex/silex": "1.*",
+        "react/react": "0.3.*"
+    },
+
+    "autoload":{
+        "psr-0":{
+            "G":"src/"
+        }
+    }
+}
