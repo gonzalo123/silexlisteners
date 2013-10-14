@@ -11,22 +11,22 @@ use Symfony\Component\HttpKernel\Event;
 $app = new Application();
 $app->register(new LoggerServiceProvider(stream_socket_client('tcp://localhost:4000')));
 
-$app->addListener(HttpKernel\KernelEvents::REQUEST, function (Event\GetResponseEvent $event) use ($app) {
+$app->on(HttpKernel\KernelEvents::REQUEST, function (Event\GetResponseEvent $event) use ($app) {
         $app->getLogger()->info($event->getName());
     }
 );
 
-$app->addListener(HttpKernel\KernelEvents::CONTROLLER, function (Event\FilterControllerEvent $event) use ($app) {
+$app->on(HttpKernel\KernelEvents::CONTROLLER, function (Event\FilterControllerEvent $event) use ($app) {
         $app->getLogger()->info($event->getName());
     }
 );
 
-$app->addListener(HttpKernel\KernelEvents::TERMINATE, function (Event\PostResponseEvent $event) use ($app) {
+$app->on(HttpKernel\KernelEvents::TERMINATE, function (Event\PostResponseEvent $event) use ($app) {
         $app->getLogger()->info($event->getName());
     }
 );
 
-$app->addListener(HttpKernel\KernelEvents::EXCEPTION, function (Event\GetResponseForExceptionEvent $event) use ($app) {
+$app->on(HttpKernel\KernelEvents::EXCEPTION, function (Event\GetResponseForExceptionEvent $event) use ($app) {
         $app->getLogger()->critical($event->getException()->getMessage());
     }
 );
